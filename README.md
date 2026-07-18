@@ -51,16 +51,10 @@ python3 -m http.server 8000
 turkiye-illeri-boyama-oyunu/
 ├── index.html    # Sayfa yapısı ve SVG harita
 ├── style.css     # Görünüm, temalar, animasyonlar
-├── script.js     # Oyun mantığı (boyama, geri alma, tema, dışa aktarma)
+├── script.js     # Oyun mantığı
 └── README.md
 ```
 
 ## 🛠️ Teknolojiler
 
 - Vanilla HTML5, CSS3 (CSS değişkenleri ile tema sistemi), JavaScript (ES6+)
-- Harici kütüphane veya bağımlılık yok
-
-## 🗺️ Veri Kaynağı
-
-İl sınırları [alpers/Turkey-Maps-GeoJSON](https://github.com/ibrahimresul/turkiye-map) kaynağındaki açık coğrafi verilerden üretilmiştir.
-
