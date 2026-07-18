@@ -1,4 +1,4 @@
-# 🗺️ Türkiye İlleri Boyama Oyunu
+# 🗺️ Türkiye Şehirlerini Boyama Oyunu
 
 Türkiye'nin 81 ilini gerçek coğrafi sınırlarıyla gösteren, tamamen tarayıcı üzerinde çalışan interaktif bir boyama oyunu. Kurulum ya da sunucu gerektirmez — dosyayı aç, boyamaya başla.
 
