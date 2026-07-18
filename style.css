@@ -1,0 +1,413 @@
+/* Turkiye Illeri Boyama Oyunu - Stiller */
+:root {
+  --bg: #0f1420;
+  --panel: #171d2b;
+  --panel-border: #262e42;
+  --text: #eef1f8;
+  --muted: #93a0bd;
+  --accent: #4f8cff;
+  --il-default: #2b3348;
+  --il-stroke: #0f1420;
+}
+
+/* ---- Temalar ---- */
+html[data-theme="gece"] {
+  --bg: #0f1420;
+  --panel: #171d2b;
+  --panel-border: #262e42;
+  --text: #eef1f8;
+  --muted: #93a0bd;
+  --accent: #4f8cff;
+  --il-default: #2b3348;
+  --il-stroke: #0f1420;
+}
+
+html[data-theme="aydinlik"] {
+  --bg: #f4f6fb;
+  --panel: #ffffff;
+  --panel-border: #dde3f0;
+  --text: #1b2233;
+  --muted: #6b7691;
+  --accent: #3366ff;
+  --il-default: #e3e8f5;
+  --il-stroke: #c7cfe4;
+}
+
+html[data-theme="okyanus"] {
+  --bg: #031e29;
+  --panel: #063243;
+  --panel-border: #0b4c62;
+  --text: #e7fbff;
+  --muted: #7fb9ca;
+  --accent: #00c2d1;
+  --il-default: #0c4a5e;
+  --il-stroke: #031e29;
+}
+
+html[data-theme="gunbatimi"] {
+  --bg: #2a1420;
+  --panel: #3a1c2c;
+  --panel-border: #5c2c40;
+  --text: #fff1e7;
+  --muted: #dba79f;
+  --accent: #ff7a59;
+  --il-default: #4c2438;
+  --il-stroke: #2a1420;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transition: background .2s ease, color .2s ease;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  padding: 18px 24px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--panel-border);
+  background: linear-gradient(180deg, rgba(79, 140, 255, 0.08), transparent);
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: clamp(20px, 3vw, 28px);
+  letter-spacing: 0.3px;
+}
+
+header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 16px;
+  min-width: 260px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.color-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#colorHex {
+  font-size: 14px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.swatch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease;
+}
+
+.swatch:hover { transform: scale(1.1); }
+.swatch.active { border-color: #fff; box-shadow: 0 0 0 2px var(--accent); }
+
+.swatch.custom-swatch {
+  background: conic-gradient(from 90deg, #ff0000, #ffae00, #f2ff00, #29ff00, #00fff2, #0033ff, #b300ff, #ff0000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.swatch.custom-swatch::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 8px;
+  background: rgba(15, 20, 32, 0.35);
+}
+
+.swatch.custom-swatch span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hidden native color input, opened programmatically as the "palette" */
+#colorPicker {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 2px solid var(--panel-border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: border-color .12s ease, transform .12s ease;
+}
+
+.theme-btn:hover { transform: translateY(-1px); }
+.theme-btn.active { border-color: var(--accent); }
+
+.theme-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .12s ease;
+}
+
+.btn:hover { filter: brightness(1.1); }
+
+.btn.secondary {
+  background: transparent;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+}
+
+.stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.stat b { color: var(--text); font-weight: 700; }
+
+#selectedName {
+  font-size: 15px;
+  font-weight: 700;
+  min-height: 20px;
+}
+
+#selectedInfo {
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 16px;
+}
+
+.map-panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 12px;
+  flex: 1 1 640px;
+  max-width: 900px;
+  position: relative;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+path.il {
+  fill: var(--il-default);
+  stroke: var(--il-stroke);
+  stroke-width: 0.8;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: fill .1s ease, stroke .1s ease, stroke-width .1s ease;
+}
+
+path.il:hover:not(.selected) {
+  stroke: #ffffff;
+  stroke-width: 1.6;
+}
+
+path.il.selected {
+  stroke: #ffffff;
+  stroke-width: 1.6;
+  vector-effect: non-scaling-stroke;
+}
+
+.il-label {
+  font-size: 6px;
+  font-weight: 700;
+  fill: #ffffff;
+  stroke: #000000;
+  stroke-width: 1.3px;
+  paint-order: stroke fill;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+svg.show-labels .il-label {
+  opacity: 1;
+}
+
+#tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: #0b0f18;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 50;
+  display: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (hover: none) {
+  #tooltip { display: none !important; }
+  .swatch:hover { transform: none; }
+  .theme-btn:hover { transform: none; }
+}
+
+@media (max-width: 700px) {
+  header { padding: 14px 16px 8px; }
+  header p { font-size: 13px; }
+
+  main {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  /* Harita once, kontrol paneli sonra gelsin */
+  .map-panel {
+    order: -1;
+    width: 100%;
+    max-width: 100%;
+    flex-basis: 100%;
+    padding: 10px;
+    position: sticky;
+    top: 8px;
+    z-index: 5;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .swatches {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+
+  .swatch {
+    min-height: 40px;
+    border-radius: 12px;
+  }
+
+  .themes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .theme-btn {
+    padding: 12px 10px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+
+  .btn {
+    padding: 13px 14px;
+    font-size: 15px;
+    min-height: 46px;
+    width: 100%;
+  }
+
+  path.il.selected {
+    stroke-width: 2.2;
+  }
+
+  path.il:hover:not(.selected) {
+    stroke-width: 0.8;
+  }
+
+  footer { font-size: 11px; padding: 14px 10px; }
+}
+
+@media (max-width: 420px) {
+  header h1 { font-size: 19px; }
+  .swatches { grid-template-columns: repeat(5, 1fr); }
+}
+
