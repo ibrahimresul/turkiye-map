@@ -61,12 +61,5 @@ turkiye-illeri-boyama-oyunu/
 
 ## 🗺️ Veri Kaynağı
 
-İl sınırları [alpers/Turkey-Maps-GeoJSON](https://github.com/alpers/Turkey-Maps-GeoJSON) kaynağındaki açık coğrafi verilerden üretilmiştir.
+İl sınırları [alpers/Turkey-Maps-GeoJSON](https://github.com/ibrahimresul/turkiye-map) kaynağındaki açık coğrafi verilerden üretilmiştir.
 
-## 📄 Lisans
-
-Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
-
-## 🤝 Katkıda Bulunma
-
-Katkılar memnuniyetle karşılanır! Bir sorun bulursan issue aç, geliştirmek istersen pull request gönder.
