@@ -27,7 +27,7 @@ Kurulum gerekmez, saf HTML/CSS/JS ile yazılmıştır.
 
 ```bash
 git clone https://github.com/ibrahimresul/turkiye-map.git
-cd turkiye-illeri-boyama-oyunu
+cd turkiye-map
 ```
 
 Ardından `index.html` dosyasını herhangi bir tarayıcıda aç. İstersen basit bir yerel sunucu ile de çalıştırabilirsin:
